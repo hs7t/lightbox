@@ -1,0 +1,10 @@
+{
+    "name": "Lightbox",
+    "description": "Low-nonsense reader extension",
+    "version": "0.1",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "src/popup/index.html"
+    },
+    "permissions": ["storage"]
+}
