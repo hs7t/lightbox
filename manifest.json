@@ -3,6 +3,7 @@
     "description": "Low-nonsense reader extension",
     "version": "0.1",
     "manifest_version": 3,
+    "action": {},
     "permissions": ["activeTab", "scripting", "storage"],
     "background": {
         "service_worker": "src/background.js"

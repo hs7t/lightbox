@@ -1,5 +1,7 @@
 /// <reference types="@types/chrome" />
+/// <reference types="@crxjs/vite-plugin/client" />
 
+import injectorFile from './injector.ts?script'
 
 browser.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
     if (tab?.id == undefined) return;
@@ -20,7 +22,7 @@ browser.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
         browser.scripting
             .executeScript({
               target : {tabId: tab.id},
-                files: ['injector.ts'],
+                files: [injectorFile],
             })
             .then(() => console.log("Now reading :)"));
     } else {
