@@ -3,9 +3,6 @@
     "description": "Low-nonsense reader extension",
     "version": "0.1",
     "manifest_version": 3,
-    "action": {
-        "default_popup": "src/popup/index.html"
-    },
     "permissions": ["activeTab", "scripting", "storage"],
     "background": {
         "service_worker": "src/background.js"

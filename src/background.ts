@@ -20,7 +20,7 @@ browser.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
         browser.scripting
             .executeScript({
               target : {tabId: tab.id},
-              files : [ "script.js" ],
+                files: ['injector.ts'],
             })
             .then(() => console.log("Now reading :)"));
     } else {
