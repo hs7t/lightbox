@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
+    import ArticleHeader from './ArticleHeader.svelte'
 
     type ArticleProperties = {
         title: string | undefined
@@ -13,33 +14,15 @@
         children,
         articleProperties,
     }: { children: Snippet; articleProperties: ArticleProperties } = $props()
-
-    let getBylineProperties = () => {
-        return [
-            articleProperties.author,
-            articleProperties.date?.toLocaleDateString(),
-            articleProperties.site,
-        ]
-    }
 </script>
 
 <article>
-    <header>
-        <p class="byline">
-            {#each getBylineProperties() as bylineProperty, i}
-                {#if bylineProperty}
-                    {bylineProperty}
-                    {#if i < getBylineProperties().length - 1}
-                        &nbsp·&nbsp;
-                    {/if}
-                {/if}
-            {/each}
-        </p>
-        <h1>{articleProperties.title}</h1>
-        {#if articleProperties.description}
-            <p class="description">{articleProperties.description}</p>
-        {/if}
-    </header>
+    <ArticleHeader
+        bylineProperties={[
+            articleProperties.author,
+            articleProperties.date?.toLocaleDateString(),
+        ]}
+    ></ArticleHeader>
 
     <hr />
 
@@ -49,7 +32,7 @@
 <style>
     /* Article content */
 
-    :global(h1, h2, h3, h4, h5) {
+    :global(article h1, article h2, article h3, article h4, article h5) {
         font-family: var(--font-reader-headings);
         text-align: center;
         width: 100%;
@@ -57,55 +40,37 @@
         font-size: inherit;
     }
 
-    :global(h4, h5) {
+    :global(article h3, article h4, article h5) {
         text-align: start;
     }
 
-    :global(h3, h4, h5) {
+    :global(article h4, article h5) {
         font-style: italic;
+        font-weight: inherit;
     }
 
-    :global(p) {
+    :global(article p) {
         margin-bottom: 1ch;
+    }
+
+    :global(article div) {
+        all: inherit;
     }
 
     /* Element specifics */
 
     article {
         width: clamp(10vw, 100ch, 80vw);
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
         padding: 10%;
+
+        box-shadow: 0 0 6.5px 0 rgba(0, 0, 0, 0.25);
         background-color: var(--color-background-primary);
 
         font-family: var(--font-reader-primary);
         font-size: var(--font-size-reader-primary);
         line-height: var(--line-height-reader-primary);
-
-        display: flex;
-        flex-direction: column;
-        gap: 2em;
-    }
-
-    header {
-        display: flex;
-        flex-direction: column;
-        gap: 2ch;
-    }
-
-    header h1 {
-        font-size: 3em;
-    }
-
-    header .byline {
-        width: 100%;
-
-        font-variant-caps: small-caps;
-        text-align: center;
-
-        margin: 0;
-    }
-
-    header .byline,
-    header .description {
-        color: var(--color-secondary);
     }
 </style>

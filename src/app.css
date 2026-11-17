@@ -5,6 +5,36 @@
     CSS resets (https://www.joshwcomeau.com/css/custom-css-reset/).
 */
 
+/* Fonts */
+
+@font-face {
+    font-family: 'LB Areal';
+    src: url('public/fonts/areal/variable.woff2') format('woff2');
+    font-display: fallback;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LB Areal';
+    src: url('public/fonts/areal/variable.woff2') format('woff2');
+    font-display: fallback;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'LB Source Serif';
+    src: url('public/fonts/source-serif/variable-roman.woff2') format('woff2');
+    font-display: fallback;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LB Source Serif';
+    src: url('public/fonts/source-serif/variable-italic.woff2') format('woff2');
+    font-display: fallback;
+    font-style: italic;
+}
+
 * {
     --h-black: #222222;
     --h-dark-gray: #5b5b5b;
@@ -16,8 +46,10 @@
     --color-background-primary: var(--h-white);
     --color-background-secondary: var(--h-off-white);
 
-    --font-reader-primary: 'Source Serif 4', serif;
-    --font-reader-headings: 'Inter', serif;
+    --font-reader-primary: 'LB Source Serif', serif;
+    --font-reader-headings: 'LB Areal', 'Arial', sans-serif;
+    --font-ui-primary:
+        'Segoe UI Variable', -apple-system, Inter, system-ui, sans-serif;
 
     --font-size-reader-primary: 1.5rem;
 
