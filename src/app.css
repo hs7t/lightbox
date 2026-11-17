@@ -5,6 +5,18 @@
     CSS resets (https://www.joshwcomeau.com/css/custom-css-reset/).
 */
 
+* {
+    --h-black: #222222;
+    --h-dark-gray: #5b5b5b;
+    --h-white: #ffffff;
+    --h-off-white: #f0f0f0;
+
+    --color-primary: var(--h-black);
+    --color-secondary: var(--h-dark-gray);
+    --color-background-primary: var(--h-white);
+    --color-background-secondary: var(--h-off-white);
+}
+
 *,
 *::before,
 *::after {

@@ -41,4 +41,9 @@
 </article>
 
 <style>
+    article {
+        width: clamp(10vw, 100ch, 80vw);
+        padding: 10%;
+        background-color: var(--color-background-primary);
+    }
 </style>

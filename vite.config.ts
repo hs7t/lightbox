@@ -4,5 +4,8 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 import manifest from './manifest.json' with { type: 'json' }
 
 export default defineConfig({
-    plugins: [svelte(), crx({ manifest })],
+    plugins: [
+        svelte({ compilerOptions: { css: 'injected' } }),
+        crx({ manifest }),
+    ],
 })
