@@ -15,6 +15,13 @@
     --color-secondary: var(--h-dark-gray);
     --color-background-primary: var(--h-white);
     --color-background-secondary: var(--h-off-white);
+
+    --font-reader-primary: 'Source Serif 4', serif;
+    --font-reader-headings: 'Inter', serif;
+
+    --font-size-reader-primary: 1.5rem;
+
+    --line-height-reader-primary: 160%;
 }
 
 *,
@@ -34,8 +41,14 @@
 }
 
 body {
-    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-synthesis: none;
+
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+    font-size-adjust: ex-height;
 }
 
 img,
@@ -64,9 +77,6 @@ h6 {
     overflow-wrap: break-word;
 }
 
-p {
-    text-wrap: pretty;
-}
 h1,
 h2,
 h3,
@@ -74,6 +84,30 @@ h4,
 h5,
 h6 {
     text-wrap: balance;
+    text-box: trim-both cap alphabetic;
+}
+
+p {
+    text-wrap: pretty;
+
+    /* Hyphenation */
+    hyphens: auto;
+    hyphenate-limit-chars: 6 3 3; /* word length, min before break, min after break */
+    hyphenate-character: '‐'; /* use proper hyphen glyph instead of dash */
+    hyphenate-limit-lines: 2; /* no more than 2 consecutive hyphenated lines */
+    hyphenate-limit-zone: 8%; /* reduce overall hyphenation frequency */
+    hyphenate-limit-last: always; /* never hyphenate the last word of a paragraph */
+}
+
+blockquote,
+p {
+    hanging-punctuation: first allow-end last;
+}
+
+a {
+    text-decoration-thickness: from-font;
+    text-underline-offset: 0.15em;
+    text-decoration-skip-ink: auto;
 }
 
 #root,
