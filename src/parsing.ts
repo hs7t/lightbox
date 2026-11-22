@@ -1,14 +1,18 @@
 import Defuddle, { type DefuddleResponse } from 'defuddle'
 import DOMPurify from 'dompurify'
 
+const globalAttributes = ['id']
+
 const allowedAttributes: Record<string, string[]> = {
-    A: ['href'],
+    A: ['href', 'name'],
     IMG: ['src', 'alt'],
 }
 
-// DOMPurify allows attributes on every tag; limit each attribute to its tags.
 DOMPurify.addHook('uponSanitizeAttribute', (node, data) => {
-    if (!allowedAttributes[node.nodeName]?.includes(data.attrName)) {
+    if (
+        !globalAttributes.includes(data.attrName) &&
+        !allowedAttributes[node.nodeName]?.includes(data.attrName)
+    ) {
         data.keepAttr = false
     }
 })
@@ -44,7 +48,10 @@ export const parseDocument = async (document: Document) => {
             'pre',
             'code',
         ],
-        ALLOWED_ATTR: Object.values(allowedAttributes).flat(),
+        ALLOWED_ATTR: [
+            ...globalAttributes,
+            ...Object.values(allowedAttributes).flat(),
+        ],
         ALLOW_DATA_ATTR: false,
         ALLOW_ARIA_ATTR: false,
     })
