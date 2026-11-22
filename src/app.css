@@ -9,34 +9,35 @@
 
 @font-face {
     font-family: 'LB Areal';
-    src: url('public/fonts/areal/variable.woff2') format('woff2');
+    src: url('assets/fonts/areal/variable.woff2') format('woff2');
     font-display: fallback;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'LB Areal';
-    src: url('public/fonts/areal/variable.woff2') format('woff2');
+    src: url('assets/fonts/areal/variable.woff2') format('woff2');
     font-display: fallback;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'LB Source Serif';
-    src: url('public/fonts/source-serif/variable-roman.woff2') format('woff2');
+    src: url('assets/fonts/source-serif/variable-roman.woff2') format('woff2');
     font-display: fallback;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'LB Source Serif';
-    src: url('public/fonts/source-serif/variable-italic.woff2') format('woff2');
+    src: url('assets/fonts/source-serif/variable-italic.woff2') format('woff2');
     font-display: fallback;
     font-style: italic;
 }
 
-* {
+:root {
     --h-black: #222222;
+    --h-off-black: #444444;
     --h-dark-gray: #5b5b5b;
     --h-white: #ffffff;
     --h-off-white: #f0f0f0;
@@ -54,6 +55,15 @@
     --font-size-reader-primary: 1.5rem;
 
     --line-height-reader-primary: 160%;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary: var(--h-white);
+        --color-secondary: var(--h-dark-gray);
+        --color-background-primary: var(--h-black);
+        --color-background-secondary: var(--h-off-black);
+    }
 }
 
 *,
@@ -81,6 +91,8 @@ body {
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
     font-size-adjust: ex-height;
+
+    color: var(--color-primary);
 }
 
 img,

@@ -1,21 +1,26 @@
-<script>
-    let { bylineProperties } = $props()
+<script lang="ts">
+    let {
+        title,
+        description,
+        bylineProperties,
+    }: {
+        title: string | undefined
+        description: string | undefined
+        bylineProperties: (string | undefined)[]
+    } = $props()
+
+    let byline = $derived(bylineProperties.filter(Boolean).join(' · '))
 </script>
 
 <header>
-    <p class="byline">
-        {#each bylineProperties as bylineProperty, i}
-            {#if bylineProperty}
-                {bylineProperty}
-                {#if i < bylineProperties.length - 1}
-                    &nbsp·&nbsp;
-                {/if}
-            {/if}
-        {/each}
-    </p>
-    <h1>{bylineProperties.title}</h1>
-    {#if bylineProperties.description}
-        <p class="description">{bylineProperties.description}</p>
+    {#if byline}
+        <p class="byline">{byline}</p>
+    {/if}
+    {#if title}
+        <h1>{title}</h1>
+    {/if}
+    {#if description}
+        <p class="description">{description}</p>
     {/if}
 </header>
 

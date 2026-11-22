@@ -16,13 +16,15 @@
     }: { children: Snippet; articleProperties: ArticleProperties } = $props()
 </script>
 
-<article>
+<article class="reader-content">
     <ArticleHeader
+        title={articleProperties.title}
+        description={articleProperties.description}
         bylineProperties={[
             articleProperties.author,
             articleProperties.date?.toLocaleDateString(),
         ]}
-    ></ArticleHeader>
+    />
 
     <hr />
 
@@ -32,7 +34,13 @@
 <style>
     /* Article content */
 
-    :global(article h1, article h2, article h3, article h4, article h5) {
+    :global(
+        .reader-content h1,
+        .reader-content h2,
+        .reader-content h3,
+        .reader-content h4,
+        .reader-content h5
+    ) {
         font-family: var(--font-reader-headings);
         text-align: center;
         width: 100%;
@@ -40,26 +48,28 @@
         font-size: inherit;
     }
 
-    :global(article h3, article h4, article h5) {
+    :global(.reader-content h3, .reader-content h4, .reader-content h5) {
         text-align: start;
     }
 
-    :global(article h4, article h5) {
+    :global(.reader-content h4, .reader-content h5) {
         font-style: italic;
         font-weight: inherit;
     }
 
-    :global(article p) {
+    :global(.reader-content p) {
         margin-bottom: 1ch;
     }
 
-    :global(article div) {
-        all: inherit;
+    :global(.reader-content div) {
+        display: flex;
+        flex-direction: column;
+        gap: inherit;
     }
 
     /* Element specifics */
 
-    article {
+    .reader-content {
         width: clamp(10vw, 100ch, 80vw);
         display: flex;
         flex-direction: column;

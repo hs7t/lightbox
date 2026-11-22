@@ -20,3 +20,5 @@ parseDocument(originalDocument).then((parseResult) => {
         document.head.appendChild(styleElement)
     }
 })
+
+// write
