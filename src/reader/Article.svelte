@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Snippet } from 'svelte'
-    import ArticleHeader from './ArticleHeader.svelte'
+    import ArticleHeader from './components/ArticleHeader.svelte'
 
     type ArticleProperties = {
         title: string | undefined
@@ -139,17 +139,13 @@
 
         ul,
         ol {
-            padding-inline-start: calc(
-                var(--text-size-0) * var(--text-line-height-0)
-            );
-            list-style-position: outside;
+            padding-inline-start: calc(var(--text-size-0));
         }
 
         :is(li, ul, ol) > :is(ul, ol) {
             padding-inline-start: calc(
                 var(--text-size-0) * var(--text-line-height-0)
             );
-            list-style-position: outside;
         }
     }
 </style>
