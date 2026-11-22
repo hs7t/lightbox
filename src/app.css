@@ -42,10 +42,14 @@
     --h-white: #ffffff;
     --h-off-white: #f0f0f0;
 
+    --h-blue: oklch(0.45 0.18 255);
+    --h-blue-light: oklch(0.75 0.12 255);
+
     --color-primary: var(--h-black);
     --color-secondary: var(--h-dark-gray);
     --color-background-primary: var(--h-white);
     --color-background-secondary: var(--h-off-white);
+    --color-accent: var(--h-blue);
 
     --font-reader-primary: 'LB Source Serif', serif;
     --font-reader-headings: 'LB Areal', 'Arial', sans-serif;
@@ -54,15 +58,17 @@
         'DejaVu Sans Mono', monospace;
 
     --font-ui-primary:
-        'Segoe UI Variable', -apple-system, Inter, system-ui, sans-serif;
+        -apple-system, 'Inter Variable', 'Segoe UI Variable', system-ui,
+        sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --color-primary: var(--h-white);
-        --color-secondary: var(--h-dark-gray);
+        --color-secondary: var(--h-off-black);
         --color-background-primary: var(--h-black);
         --color-background-secondary: var(--h-off-black);
+        --color-accent: var(--h-blue-light);
     }
 }
 
@@ -93,6 +99,7 @@ body {
     font-size-adjust: ex-height;
 
     color: var(--color-primary);
+    font-family: var(--font-ui-primary);
 }
 
 img,
@@ -152,6 +159,7 @@ a {
     text-decoration-thickness: from-font;
     text-underline-offset: 0.15em;
     text-decoration-skip-ink: auto;
+    color: var(--color-accent);
 }
 
 #root,
