@@ -1,24 +1,29 @@
-import { mount } from 'svelte'
 import { parseDocument } from './parsing'
-import readerBase from './reader/base.html?raw'
-import Reader from './reader/Reader.svelte'
+import type { ReaderMessage } from './reader/messages'
 
-import styleFile from './app.css?inline'
+parseDocument(document).then(async (article) => {
+    await chrome.runtime.sendMessage({
+        type: 'reader:store',
+        article,
+    } satisfies ReaderMessage)
 
-let originalDocument = document
+    const title = document.title
+    const head = document.createElement('head')
+    const body = document.createElement('body')
+    const frame = document.createElement('iframe')
 
-parseDocument(originalDocument).then((parseResult) => {
-    document.getElementsByTagName('html')[0].innerHTML = readerBase
+    frame.src = chrome.runtime.getURL('src/reader/base.html')
+    frame.title = 'Lightbox reader'
+    Object.assign(frame.style, {
+        position: 'fixed',
+        inset: '0',
+        width: '100%',
+        height: '100%',
+        border: '0',
+    })
 
-    const target: HTMLElement | null = document.getElementById('app')
-
-    if (target) {
-        mount(Reader, { target, props: { parsedDocument: parseResult } })
-
-        const styleElement = document.createElement('style')
-        styleElement.textContent = styleFile
-        document.head.appendChild(styleElement)
-    }
+    body.appendChild(frame)
+    document.documentElement.removeAttribute('style')
+    document.documentElement.replaceChildren(head, body)
+    document.title = title
 })
-
-// write

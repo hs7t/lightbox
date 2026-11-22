@@ -4,13 +4,13 @@
     "version": "0.1",
     "manifest_version": 3,
     "action": {},
-    "permissions": ["activeTab", "scripting", "storage"],
+    "permissions": ["activeTab", "scripting", "storage", "webNavigation"],
     "background": {
-        "service_worker": "src/background.js"
+        "service_worker": "src/background.ts"
     },
     "web_accessible_resources": [
         {
-            "resources": ["assets/*.woff2"],
+            "resources": ["src/reader/base.html"],
             "matches": ["<all_urls>"]
         }
     ]

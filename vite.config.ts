@@ -8,13 +8,9 @@ export default defineConfig({
         svelte({ compilerOptions: { css: 'injected' } }),
         crx({ manifest }),
     ],
-    experimental: {
-        renderBuiltUrl(filename, { hostType, type }) {
-            if (hostType === 'js' && type === 'asset') {
-                return {
-                    runtime: `chrome.runtime.getURL(${JSON.stringify(encodeURI(filename))})`,
-                }
-            }
+    build: {
+        rolldownOptions: {
+            input: { reader: 'src/reader/base.html' },
         },
     },
 })
