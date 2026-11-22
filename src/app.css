@@ -49,12 +49,12 @@
 
     --font-reader-primary: 'LB Source Serif', serif;
     --font-reader-headings: 'LB Areal', 'Arial', sans-serif;
+    --font-reader-monospace:
+        ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+        'DejaVu Sans Mono', monospace;
+
     --font-ui-primary:
         'Segoe UI Variable', -apple-system, Inter, system-ui, sans-serif;
-
-    --font-size-reader-primary: 1.5rem;
-
-    --line-height-reader-primary: 160%;
 }
 
 @media (prefers-color-scheme: dark) {

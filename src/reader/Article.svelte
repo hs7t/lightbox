@@ -16,7 +16,7 @@
     }: { children: Snippet; articleProperties: ArticleProperties } = $props()
 </script>
 
-<article class="reader-content">
+<article class="prose">
     <ArticleHeader
         title={articleProperties.title}
         description={articleProperties.description}
@@ -32,15 +32,42 @@
 </article>
 
 <style>
+    * {
+        --text-size-0: calc(1rem + 0.2vw);
+        --text-size-1: calc(var(--text-size-0) * var(--text-line-height-0));
+        --text-size-2: calc(var(--text-size-1) * var(--text-line-height-0));
+        --text-size-3: calc(var(--text-size-2) * var(--text-line-height-0));
+
+        --text-size-smaller: calc(var(--text-size-0) - 0.2vw);
+
+        --text-line-height-0: 1.5;
+    }
+
+    /* Element specifics */
+
+    .prose {
+        width: clamp(10vw, 100ch, 80vw);
+        display: flex;
+        flex-direction: column;
+        padding: 10%;
+
+        box-shadow: 0 0 6.5px 0 rgba(0, 0, 0, 0.25);
+        background-color: var(--color-background-primary);
+
+        font-family: var(--font-reader-primary);
+        font-size: var(--text-size-0);
+        line-height: var(--text-line-height-regular);
+
+        --flow-space: var(--text-size-0);
+    }
+
     /* Article content */
 
-    :global(
-        .reader-content h1,
-        .reader-content h2,
-        .reader-content h3,
-        .reader-content h4,
-        .reader-content h5
-    ) {
+    :global(.prose > * + *) {
+        margin-block-start: var(--flow-space);
+    }
+
+    :global(.prose h1, .prose h2, .prose h3, .prose h4, .prose h5) {
         font-family: var(--font-reader-headings);
         text-align: center;
         width: 100%;
@@ -48,39 +75,53 @@
         font-size: inherit;
     }
 
-    :global(.reader-content h3, .reader-content h4, .reader-content h5) {
+    :global(.prose h3, .prose h4, .prose h5) {
         text-align: start;
     }
 
-    :global(.reader-content h4, .reader-content h5) {
+    :global(.prose h4, .prose h5) {
         font-style: italic;
         font-weight: inherit;
     }
 
-    :global(.reader-content p) {
-        margin-bottom: 1ch;
-    }
-
-    :global(.reader-content div) {
+    :global(.prose div) {
         display: flex;
         flex-direction: column;
         gap: inherit;
     }
 
-    /* Element specifics */
+    :global(.prose img) {
+        max-width: 100%;
+        height: auto;
 
-    .reader-content {
-        width: clamp(10vw, 100ch, 80vw);
-        display: flex;
-        flex-direction: column;
-        gap: 2em;
-        padding: 10%;
+        background-color: var(--color-background-secondary);
+    }
 
-        box-shadow: 0 0 6.5px 0 rgba(0, 0, 0, 0.25);
-        background-color: var(--color-background-primary);
+    :global(.prose code) {
+        font-family: var(--font-reader-monospace);
+        font-size: var(--text-size-smaller);
+        line-height: var(--text-line-height-regular);
 
-        font-family: var(--font-reader-primary);
-        font-size: var(--font-size-reader-primary);
-        line-height: var(--line-height-reader-primary);
+        background-color: var(--color-background-secondary);
+        padding: 0.2em 0.4em;
+
+        border-radius: 0.2em;
+    }
+
+    :global(.prose pre > code) {
+        all: unset;
+    }
+
+    :global(.prose pre) {
+        font-family: var(--font-reader-monospace);
+        font-size: var(--text-size-smaller);
+        line-height: var(--text-line-height-regular);
+
+        background-color: var(--color-background-secondary);
+        border-radius: 0.2em;
+
+        padding: 0.5em 1em;
+        width: 100%;
+        overflow-y: scroll;
     }
 </style>

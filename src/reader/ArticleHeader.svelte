@@ -32,7 +32,13 @@
     }
 
     header h1 {
-        font-size: 3em;
+        font-size: var(--text-size-3);
+    }
+
+    header .byline,
+    header .description {
+        color: var(--color-secondary);
+        text-align: center;
     }
 
     header .byline {
@@ -40,14 +46,5 @@
 
         font-variant-caps: small-caps;
         font-feature-settings: 'smcp';
-
-        text-align: center;
-
-        margin: 0;
-    }
-
-    header .byline,
-    header .description {
-        color: var(--color-secondary);
     }
 </style>
