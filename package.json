@@ -23,6 +23,7 @@
         "vite": "^8.3.6"
     },
     "dependencies": {
-        "defuddle": "^0.19.6"
+        "defuddle": "^0.19.6",
+        "sanitize-html": "^2.18.2"
     }
 }
