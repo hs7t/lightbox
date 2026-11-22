@@ -33,14 +33,14 @@
 
 <style>
     * {
-        --text-size-0: calc(1rem + 0.2vw);
+        --text-line-height-0: 1.65;
+
+        --text-size-0: calc(1rem + 0.25vw);
         --text-size-1: calc(var(--text-size-0) * var(--text-line-height-0));
         --text-size-2: calc(var(--text-size-1) * var(--text-line-height-0));
         --text-size-3: calc(var(--text-size-2) * var(--text-line-height-0));
 
-        --text-size-smaller: calc(var(--text-size-0) - 0.2vw);
-
-        --text-line-height-0: 1.5;
+        --text-size-smaller: calc(var(--text-size-0) - 0.25vw);
     }
 
     /* Element specifics */
@@ -56,7 +56,7 @@
 
         font-family: var(--font-reader-primary);
         font-size: var(--text-size-0);
-        line-height: var(--text-line-height-regular);
+        line-height: var(--text-line-height-0);
 
         --flow-space: var(--text-size-0);
     }
@@ -84,6 +84,16 @@
         font-weight: inherit;
     }
 
+    :global(.prose h1) {
+        font-size: var(--text-size-2);
+        --flow-space: var(--text-size-2);
+    }
+
+    :global(.prose h2) {
+        font-size: var(--text-size-1);
+        --flow-space: var(--text-size-2);
+    }
+
     :global(.prose div) {
         display: flex;
         flex-direction: column;
@@ -100,7 +110,7 @@
     :global(.prose code) {
         font-family: var(--font-reader-monospace);
         font-size: var(--text-size-smaller);
-        line-height: var(--text-line-height-regular);
+        line-height: var(--text-line-height-0);
 
         background-color: var(--color-background-secondary);
         padding: 0.2em 0.4em;
@@ -115,7 +125,7 @@
     :global(.prose pre) {
         font-family: var(--font-reader-monospace);
         font-size: var(--text-size-smaller);
-        line-height: var(--text-line-height-regular);
+        line-height: var(--text-line-height-0);
 
         background-color: var(--color-background-secondary);
         border-radius: 0.2em;

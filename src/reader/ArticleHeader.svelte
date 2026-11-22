@@ -25,14 +25,18 @@
 </header>
 
 <style>
+    :global(header > * + *) {
+        margin-block-start: 0;
+    }
+
     header {
         display: flex;
         flex-direction: column;
-        gap: 2ch;
+        gap: var(--text-size-1);
     }
 
     header h1 {
-        font-size: var(--text-size-3);
+        font-size: var(--text-size-2);
     }
 
     header .byline,
