@@ -58,3 +58,25 @@ export const parseDocument = async (document: Document) => {
 
     return parsedDocument
 }
+
+export async function process(document: Document, readerUrl: string) {
+    const article = await parseDocument(document)
+    const readerDocument = document.implementation.createHTMLDocument(
+        document.title,
+    )
+    const frame = readerDocument.createElement('iframe')
+
+    frame.src = readerUrl
+    frame.title = 'Lightbox reader'
+    Object.assign(frame.style, {
+        position: 'fixed',
+        inset: '0',
+        width: '100%',
+        height: '100%',
+        border: '0',
+    })
+
+    readerDocument.body.appendChild(frame)
+
+    return { article, document: readerDocument }
+}
