@@ -12,12 +12,12 @@
     let byline = $derived(bylineProperties.filter(Boolean).join(' · '))
 </script>
 
-<header>
+<header class="article-header">
     {#if byline}
         <p class="byline">{byline}</p>
     {/if}
     {#if title}
-        <h1>{title}</h1>
+        <h1 class="title">{title}</h1>
     {/if}
     {#if description}
         <p class="description">{description}</p>
@@ -25,30 +25,29 @@
 </header>
 
 <style>
-    :global(header > * + *) {
-        margin-block-start: 0;
+    :global(.article-header > * + *) {
+        margin: 0;
     }
 
-    header {
+    .article-header {
         display: flex;
         flex-direction: column;
-        gap: var(--text-size-1);
-    }
+        gap: var(--text-size-0);
 
-    header h1 {
-        font-size: var(--text-size-2);
-    }
+        .title {
+            margin: 0; /* Specificity conflict w/ global article rules; need to fix */
+            font-size: var(--text-size-2);
+        }
 
-    header .byline,
-    header .description {
-        color: var(--color-secondary);
-        text-align: center;
-    }
+        .byline,
+        .description {
+            color: var(--color-secondary);
+        }
+        .byline {
+            width: 100%;
 
-    header .byline {
-        width: 100%;
-
-        font-variant-caps: small-caps;
-        font-feature-settings: 'smcp';
+            font-variant-caps: small-caps;
+            font-feature-settings: 'smcp';
+        }
     }
 </style>

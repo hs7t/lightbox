@@ -1,6 +1,8 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte'
+    import { mount, onMount, type Snippet } from 'svelte'
     import ArticleHeader from './components/ArticleHeader.svelte'
+    import CodeBlock from './components/CodeBlock.svelte'
+    import Figure from './components/Figure.svelte'
 
     type ArticleProperties = {
         title: string | undefined
@@ -10,10 +12,91 @@
         site: string | undefined
     }
 
+    const createElement = (
+        document: HTMLDocument,
+        tagName: string = 'div',
+        classes: Array<string> | undefined = undefined,
+    ) => {
+        const element = document.createElement(tagName)
+
+        if (classes) {
+            element.classList.add(...classes)
+        }
+
+        return element
+    }
+
+    export const installComponents = async (document: Document) => {
+        // Code blocks
+
+        const preElements = document.getElementsByTagName('pre')
+
+        const codeBlocks = []
+
+        for (const item of preElements) {
+            const hasCode = item.querySelector('code')
+            if (hasCode) {
+                codeBlocks.push(item)
+            }
+        }
+
+        codeBlocks.forEach((pre) => {
+            const content = pre.innerText
+            const container = createElement(document, 'div', [
+                'wrapper',
+                'code-block-container',
+            ])
+
+            pre.replaceWith(container)
+
+            mount(CodeBlock, {
+                target: container,
+                props: {
+                    code: content,
+                    language: undefined,
+                },
+            })
+        })
+
+        const figureElements = document.getElementsByTagName('figure')
+
+        const figures = []
+
+        for (const item of figureElements) {
+            const hasImg = item.querySelector('img')
+            if (hasImg) {
+                figures.push(item)
+            }
+        }
+
+        figures.forEach((figure) => {
+            const content = figure.innerHTML
+            const container = createElement(document, 'div', [
+                'wrapper',
+                'figure-container',
+            ])
+
+            figure.replaceWith(container)
+
+            mount(Figure, {
+                target: container,
+                props: {
+                    contents: content,
+                },
+            })
+        })
+
+        return document
+    }
+
     let {
         children,
         articleProperties,
     }: { children: Snippet; articleProperties: ArticleProperties } = $props()
+
+    onMount(() => {
+        installComponents(document)
+    })
 </script>
 
 <article class="prose">
@@ -110,9 +193,12 @@
         h3,
         h4,
         h5 {
-            font-family: var(--font-reader-headings);
-            text-align: center;
+            --flow-space: var(--text-size-3);
             width: 100%;
+            text-align: start;
+            margin-bottom: var(--text-size-0);
+
+            font-family: var(--font-reader-headings);
             line-height: 100%; /* TODO: make variable*/
             font-size: inherit;
         }
@@ -120,7 +206,8 @@
         h3,
         h4,
         h5 {
-            text-align: start;
+            --flow-space: var(--text-size-2);
+            margin-bottom: 0;
         }
 
         h4,
@@ -131,12 +218,10 @@
 
         h1 {
             font-size: var(--text-size-2);
-            --flow-space: var(--text-size-2);
         }
 
         h2 {
             font-size: var(--text-size-1);
-            --flow-space: var(--text-size-2);
         }
 
         img {

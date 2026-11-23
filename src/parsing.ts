@@ -61,6 +61,7 @@ export const parseDocument = async (document: Document) => {
 
 export async function process(document: Document, readerUrl: string) {
     const article = await parseDocument(document)
+
     const readerDocument = document.implementation.createHTMLDocument(
         document.title,
     )
@@ -76,7 +77,7 @@ export async function process(document: Document, readerUrl: string) {
         border: '0',
     })
 
-    readerDocument.body.appendChild(frame)
+    readerDocument.body.append(frame)
 
     return { article, document: readerDocument }
 }
