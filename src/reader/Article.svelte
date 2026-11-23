@@ -61,6 +61,43 @@
         --flow-space: var(--text-size-0);
     }
 
+    .prose {
+        animation: slideArticleIn 500ms
+            linear(0, 0.1, 0.25, 0.5, 0.68, 0.8, 0.88, 0.94, 0.98, 0.995, 1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .prose {
+            animation: fadeIn 500ms
+                linear(0, 0.1, 0.25, 0.5, 0.68, 0.8, 0.88, 0.94, 0.98, 0.995, 1);
+        }
+    }
+
+    @keyframes slideArticleIn {
+        0% {
+            transform: translateY(50vh);
+            opacity: 0;
+        }
+
+        20% {
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0.2;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
     /* Article content */
 
     .prose :global {
