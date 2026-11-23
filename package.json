@@ -4,7 +4,8 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev": "vite build; npx concurrently \"vite build --watch\" \"web-ext run --target chromium --chromium-binary $BROWSER --source-dir dist\"",
+        "dev:chromium": "vite build; npx concurrently \"vite build --watch\" \"web-ext run --target chromium --chromium-binary chromium --source-dir dist\"",
         "dev:playground": "vite --config vite.playground.config.ts --open /playground.html",
         "build": "vite build",
         "preview": "vite preview",
@@ -16,12 +17,14 @@
         "@tsconfig/svelte": "^5.0.8",
         "@types/chrome": "^0.3.7",
         "@types/node": "^24.19.2",
+        "concurrently": "^10.0.7",
         "prettier": "^3.10.1",
         "prettier-plugin-svelte": "^4.1.1",
         "svelte": "^5.57.3",
         "svelte-check": "^4.7.7",
         "typescript": "~6.0.3",
-        "vite": "^8.3.6"
+        "vite": "^8.3.6",
+        "web-ext": "^10.8.0"
     },
     "dependencies": {
         "defuddle": "^0.19.6",
