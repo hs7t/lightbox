@@ -1,19 +1,46 @@
 <script lang="ts">
-    let { contents }: { contents: string } = $props()
+    import { slide } from 'svelte/transition'
+    import InlineButton from '../../components/InlineButton.svelte'
+
+    let {
+        caption = undefined,
+        contents,
+    }: { caption: string | undefined; contents: string } = $props()
+
+    let open = $state(false)
 </script>
 
-<figure>
-    {@html contents}
-</figure>
+<div class="collapsible">
+    <figure>
+        <figcaption>{caption ? caption : 'Figure'}</figcaption>
+
+        <InlineButton aria-expanded={open} onclick={() => (open = !open)}>
+            {'Show figure'}
+        </InlineButton>
+        {#if open}
+            <div class="figure-content" transition:slide>
+                {@html contents}
+            </div>
+        {/if}
+    </figure>
+</div>
 
 <style>
-    :global(figure) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    figure {
+        display: grid;
+        grid-template-columns: 1fr auto;
 
-        margin: 1rem 0;
+        figcaption {
+            grid-column: 1;
+        }
+
+        button {
+            grid-column: 2;
+        }
+
+        .figure-content {
+            grid-column: 1 / -1;
+        }
     }
 
     :global(figure > *) {
@@ -21,9 +48,8 @@
     }
 
     :global(figure > figcaption) {
-        font-family: var(--font-reader-headings);
+        font-family: var(--font-ui-primary);
         font-size: var(--text-size-smaller);
-        text-align: center;
         color: var(--h-dark-gray);
     }
 </style>

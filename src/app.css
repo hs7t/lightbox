@@ -52,7 +52,7 @@
     --color-accent: var(--h-blue);
 
     --font-reader-primary: 'LB Source Serif', serif;
-    --font-reader-headings: 'LB Areal', 'Arial', sans-serif;
+    --font-reader-headings: 'Inter Display', 'Arial', sans-serif;
     --font-reader-monospace:
         ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
         'DejaVu Sans Mono', monospace;
@@ -60,6 +60,9 @@
     --font-ui-primary:
         -apple-system, 'Inter Variable', 'Segoe UI Variable', system-ui,
         sans-serif;
+
+    --ui-text-size-smaller: calc(var(--text-size-0) - 0.2vw);
+    --ui-text-size-0: calc(1rem);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -92,6 +95,7 @@ body {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     font-synthesis: none;
+    font-optical-sizing: auto;
 
     -moz-text-size-adjust: none;
     -webkit-text-size-adjust: none;
@@ -100,6 +104,7 @@ body {
 
     color: var(--color-primary);
     font-family: var(--font-ui-primary);
+    font-size: var(--ui-text-size-0);
 }
 
 img,

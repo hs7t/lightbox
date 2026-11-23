@@ -1,7 +1,11 @@
+<script>
+    import InlineButton from '../components/InlineButton.svelte'
+</script>
+
 <menu>
     <input type="checkbox" id="show-pictures" />
     <label for="show-pictures">Show pictures</label>
-    <button>More settings</button>
+    <InlineButton>More settings</InlineButton>
 </menu>
 
 <style>

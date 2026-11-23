@@ -70,7 +70,14 @@
         }
 
         figures.forEach((figure) => {
-            const content = figure.innerHTML
+            const imageElement: HTMLImageElement =
+                figure.getElementsByTagName('img')[0]
+            const captionElement = figure.getElementsByTagName('figcaption')[0]
+
+            const caption: string | undefined = captionElement?.innerText
+                ? captionElement?.innerText
+                : imageElement.alt
+
             const container = createElement(document, 'div', [
                 'wrapper',
                 'figure-container',
@@ -81,7 +88,8 @@
             mount(Figure, {
                 target: container,
                 props: {
-                    contents: content,
+                    contents: imageElement.outerHTML,
+                    caption: caption,
                 },
             })
         })
@@ -102,7 +110,6 @@
 <article class="prose">
     <ArticleHeader
         title={articleProperties.title}
-        description={articleProperties.description}
         bylineProperties={[
             articleProperties.author,
             articleProperties.date?.toLocaleDateString(),
@@ -118,7 +125,7 @@
     * {
         --text-line-height-0: 1.65;
 
-        --text-size-0: calc(1rem + 0.25vw);
+        --text-size-0: 1.4rem;
         --text-size-1: calc(var(--text-size-0) * var(--text-line-height-0));
         --text-size-2: calc(var(--text-size-1) * var(--text-line-height-0));
         --text-size-3: calc(var(--text-size-2) * var(--text-line-height-0));
@@ -134,7 +141,7 @@
         flex-direction: column;
         padding: 10%;
 
-        box-shadow: 0 0 6.5px 0 rgba(0, 0, 0, 0.25);
+        box-shadow: 0 0 6.5px 0 rgb(0 0 0 / 10%);
         background-color: var(--color-background-primary);
 
         font-family: var(--font-reader-primary);

@@ -1,11 +1,9 @@
 <script lang="ts">
     let {
         title,
-        description,
         bylineProperties,
     }: {
         title: string | undefined
-        description: string | undefined
         bylineProperties: (string | undefined)[]
     } = $props()
 
@@ -18,9 +16,6 @@
     {/if}
     {#if title}
         <h1 class="title">{title}</h1>
-    {/if}
-    {#if description}
-        <p class="description">{description}</p>
     {/if}
 </header>
 
@@ -39,13 +34,9 @@
             font-size: var(--text-size-2);
         }
 
-        .byline,
-        .description {
-            color: var(--color-secondary);
-        }
         .byline {
             width: 100%;
-
+            color: var(--color-secondary);
             font-variant-caps: small-caps;
             font-feature-settings: 'smcp';
         }
