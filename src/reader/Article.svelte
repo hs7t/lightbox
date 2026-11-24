@@ -12,6 +12,11 @@
         site: string | undefined
     }
 
+    let {
+        children,
+        articleProperties,
+    }: { children: Snippet; articleProperties: ArticleProperties } = $props()
+
     const createElement = (
         document: HTMLDocument,
         tagName: string = 'div',
@@ -96,11 +101,6 @@
 
         return document
     }
-
-    let {
-        children,
-        articleProperties,
-    }: { children: Snippet; articleProperties: ArticleProperties } = $props()
 
     onMount(() => {
         installComponents(document)
