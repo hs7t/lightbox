@@ -30,8 +30,9 @@
         gap: var(--text-size-0);
 
         .title {
-            margin: 0; /* Specificity conflict w/ global article rules; need to fix */
             font-size: var(--text-size-2);
+
+            /* Specificity conflict w/ global article rules; need to fix */
         }
 
         .byline {

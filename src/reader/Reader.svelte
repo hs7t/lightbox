@@ -8,7 +8,7 @@
 
 <div id="app-box">
     <main>
-        <Tools></Tools>
+        <!--<Tools></Tools>-->
         <Article
             articleProperties={{
                 title: parsedDocument.title,
@@ -37,5 +37,13 @@
         padding-block: 10dvh;
 
         background-color: var(--color-background-secondary);
+
+        transition: background-color 400ms;
+    }
+
+    @media (max-width: 1200px) {
+        #app-box {
+            background-color: var(--color-background-primary);
+        }
     }
 </style>

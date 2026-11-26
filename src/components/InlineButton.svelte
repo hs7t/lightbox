@@ -20,5 +20,8 @@
         text-decoration: underline dotted;
         font-family: var(--font-ui-primary);
         font-size: var(--ui-text-size-0);
+
+        width: fit-content;
+        height: fit-content;
     }
 </style>

@@ -116,8 +116,6 @@
         ]}
     />
 
-    <hr />
-
     {@render children?.()}
 </article>
 
@@ -125,7 +123,7 @@
     * {
         --text-line-height-0: 1.65;
 
-        --text-size-0: 1.4rem;
+        --text-size-0: 1.2rem;
         --text-size-1: calc(var(--text-size-0) * var(--text-line-height-0));
         --text-size-2: calc(var(--text-size-1) * var(--text-line-height-0));
         --text-size-3: calc(var(--text-size-2) * var(--text-line-height-0));
@@ -139,27 +137,40 @@
         width: clamp(10vw, 100ch, 80vw);
         display: flex;
         flex-direction: column;
-        padding: 10%;
+        padding: 12%;
 
         box-shadow: 0 0 6.5px 0 rgb(0 0 0 / 10%);
         background-color: var(--color-background-primary);
+        color: var(--color-content-primary);
 
         font-family: var(--font-reader-primary);
         font-size: var(--text-size-0);
         line-height: var(--text-line-height-0);
 
         --flow-space: var(--text-size-0);
+
+        transition: box-shadow background-color 400ms;
+    }
+
+    @media (max-width: 1200px) {
+        .prose {
+            box-shadow: none;
+            background-color: unset;
+        }
+    }
+
+    .prose::selection {
+        color: var(--color-background-primary);
+        background-color: var(--color-content-primary);
     }
 
     .prose {
-        animation: slideArticleIn 500ms
-            linear(0, 0.1, 0.25, 0.5, 0.68, 0.8, 0.88, 0.94, 0.98, 0.995, 1);
+        animation: slideArticleIn 500ms var(--animation-spring-in-out-circ);
     }
 
     @media (prefers-reduced-motion: reduce) {
         .prose {
-            animation: fadeIn 500ms
-                linear(0, 0.1, 0.25, 0.5, 0.68, 0.8, 0.88, 0.94, 0.98, 0.995, 1);
+            animation: fadeIn 500ms var(--animation-spring-in-out-circ);
         }
     }
 
@@ -208,6 +219,11 @@
             font-family: var(--font-reader-headings);
             line-height: 100%; /* TODO: make variable*/
             font-size: inherit;
+
+            color: var(--color-content-landmarks);
+
+            border-bottom: solid 1pt var(--color-secondary);
+            padding-bottom: 0.5em;
         }
 
         h3,
@@ -219,7 +235,14 @@
 
         h4,
         h5 {
+            border: unset;
+            padding: unset;
+
+            --flow-space: var(--text-size-1);
             font-style: italic;
+        }
+
+        h5 {
             font-weight: inherit;
         }
 
@@ -254,16 +277,34 @@
         }
 
         pre {
+            /* TODO: move to own component */
+
             font-family: var(--font-reader-monospace);
             font-size: var(--text-size-smaller);
             line-height: var(--text-line-height-0);
 
             background-color: var(--color-background-secondary);
-            border-radius: 0.2em;
+            border-radius: 4pt;
 
             padding: 0.5em 1em;
             width: 100%;
             overflow-y: scroll;
+        }
+
+        blockquote {
+            background-color: var(--color-background-secondary);
+            padding: 0.5em 1em;
+            border-radius: 4pt;
+
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+
+            text-align: justify;
+        }
+
+        blockquote p:not(:first-child) {
+            text-indent: 2em;
         }
 
         ul,

@@ -32,7 +32,7 @@
 <style>
     figure {
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 20%;
         align-items: baseline;
 
         figcaption {
@@ -41,6 +41,7 @@
 
         :global(.button) {
             grid-column: 2;
+            justify-self: end;
         }
 
         .figure-content {
